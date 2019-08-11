@@ -1,4 +1,5 @@
 import 'package:days90/pages/add_resolution.dart';
+import 'package:days90/pages/user_profile.dart';
 import 'package:days90/scoped_models/main_model.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +22,13 @@ class SideDrawer extends StatelessWidget {
                   .push(MaterialPageRoute(builder: (BuildContext context) {
                 return AddResolutionPage();
               }));
+            },
+          ),
+          ListTile(
+            title: Text('Profile'),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => UserProfilePage(_model)));
             },
           ),
           ListTile(

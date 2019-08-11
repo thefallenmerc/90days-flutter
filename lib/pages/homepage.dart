@@ -97,6 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return ScopedModelDescendant(
       builder: (BuildContext context, Widget child, MainModel model) {
+        model.setSelectedResolutionIndex = null;
         return Scaffold(
             appBar: AppBar(
               title: Text('90 Days'),

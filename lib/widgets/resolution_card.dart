@@ -1,5 +1,6 @@
 import 'package:days90/models/resolution.dart';
 import 'package:days90/scoped_models/main_model.dart';
+import 'package:days90/widgets/resolution_decision_row.dart';
 import 'package:flutter/material.dart';
 import '../pages/resolution.dart';
 
@@ -15,17 +16,14 @@ class ResolutionCard extends StatelessWidget {
         builder: (BuildContext context) {
           return Container(
             padding: EdgeInsets.all(20.0),
-            child: RaisedButton(
-              child: Text('Delete'),
-              onPressed: () {},
-            ),
+            child: ResolutionDecisionRow(
+                model, index, model.resolutionList[index]),
           );
         });
   }
 
   @override
   Widget build(BuildContext context) {
-    model.selectedResolutionIndex = index;
     Resolution resolution = model.resolutionList[index];
     Color bgColor = resolution.completed == 1
         ? Colors.blue

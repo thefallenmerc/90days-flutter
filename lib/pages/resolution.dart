@@ -1,6 +1,7 @@
 import 'package:days90/models/resolution.dart';
 import 'package:days90/pages/add_resolution.dart';
 import 'package:days90/widgets/resolution_card.dart';
+import 'package:days90/widgets/resolution_decision_row.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import '../scoped_models/main_model.dart';
@@ -110,7 +111,7 @@ class _ResolutionPageState extends State<ResolutionPage> {
           builder: (BuildContext context, Widget child, MainModel model) {
             final Resolution currentResolution =
                 model.resolutionList[widget.currentProduct];
-            model.selectedResolutionIndex = widget.currentProduct;
+            model.setSelectedResolutionIndex = widget.currentProduct;
             title = currentResolution.title.toUpperCase();
             return SingleChildScrollView(
                 child: Column(children: <Widget>[
@@ -132,7 +133,8 @@ class _ResolutionPageState extends State<ResolutionPage> {
                       ),
                       padding: EdgeInsets.all(10.0),
                     )
-                  : _buildDecisionRow(context, model, currentResolution)
+                  : ResolutionDecisionRow(
+                      model, widget.currentProduct, currentResolution)
             ]));
           },
         ));

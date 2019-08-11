@@ -1,5 +1,6 @@
 import 'package:days90/configs/api.dart';
 import 'package:days90/models/resolution.dart';
+import 'package:days90/models/user.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:http/http.dart' as http;
@@ -40,19 +41,22 @@ class ConnectedModel extends Model {
   }
 
   void _showScaffold(BuildContext context, String text) {
-    Scaffold.of(context).showSnackBar(SnackBar(
-      content: Text(text),
-    ));
+    try {
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text(text),
+      ));
+    } catch (error) {}
   }
 }
 
 class AutheticationModel extends ConnectedModel {
   PublishSubject<bool> userSubject = PublishSubject();
 
+  User user;
+
   void login(BuildContext context, Map<String, dynamic> _formData) async {
     startLoading();
     try {
-      print(_formData);
       http.Response response = await http.post(
           ApiConfig.base_url + ApiConfig.login,
           body: _formData,
@@ -68,6 +72,7 @@ class AutheticationModel extends ConnectedModel {
       }
       return;
     } catch (err) {
+      print(err);
       Scaffold.of(context).showSnackBar(
           new SnackBar(content: new Text('Could not log you in!')));
     } finally {
@@ -80,6 +85,31 @@ class AutheticationModel extends ConnectedModel {
     if (prefs.getString(USERTOKEN) != null) {
       userSubject.add(true);
       notifyListeners();
+    }
+  }
+
+  void getUserProfile(BuildContext context, {bool force}) async {
+    try {
+      startLoading();
+      SharedPreferences _prefs = await SharedPreferences.getInstance();
+      if (force == null) force = false;
+      if (force) {
+        http.Response response = await http.get(
+            ApiConfig.base_url + ApiConfig.user_profile,
+            headers: await _getAuthorizedHeaders());
+        if (response.statusCode == 200) {
+          Map<String, dynamic> userMap = json.decode(response.body)["success"];
+          await _prefs.setString('user_data', json.encode(userMap));
+          user = User.fromJson(userMap);
+        } else {
+          _showScaffold(context, 'Some error occured fetching profile!');
+        }
+      }
+    } catch (e) {
+      _showScaffold(context, 'Some error occured fetching profile!');
+      print('Some error occurred fetching user profile');
+    } finally {
+      endLoading();
     }
   }
 
@@ -96,19 +126,27 @@ class ResolutionModel extends ConnectedModel {
   List<Resolution> resolutionList = [];
   int selectedResolutionIndex;
 
+  set setSelectedResolutionIndex(index) {
+    selectedResolutionIndex = index;
+    notifyListeners();
+  }
+
   void getResolutions(BuildContext context) async {
     resolutionList = [];
     startLoading();
-    http.Response response = await http.get(
-        ApiConfig.base_url + ApiConfig.resolutions,
-        headers: await _getAuthorizedHeaders());
-    if (response.statusCode == 200) {
-      List<dynamic> responseData = json.decode(response.body)['success'];
-      responseData.forEach((e) {
-        resolutionList.add(Resolution.fromJson(e));
-      });
+    try {
+      http.Response response = await http.get(
+          ApiConfig.base_url + ApiConfig.resolutions,
+          headers: await _getAuthorizedHeaders());
+      if (response.statusCode == 200) {
+        List<dynamic> responseData = json.decode(response.body)['success'];
+        responseData.forEach((e) {
+          resolutionList.add(Resolution.fromJson(e));
+        });
+      }
+    } catch (error) {} finally {
+      endLoading();
     }
-    endLoading();
   }
 
   void saveResolution(
@@ -122,10 +160,16 @@ class ResolutionModel extends ConnectedModel {
       if (response.statusCode == 201) {
         Resolution resolution =
             Resolution.fromJson(json.decode(response.body)['success']);
+        print('resolution ' + resolution.createdAt);
         resolutionList.insert(0, resolution);
         endLoading();
         Navigator.of(context).pop();
         Navigator.of(context).pop();
+      } else {
+        Scaffold.of(context).showSnackBar(new SnackBar(
+          content: Text('Ye to fuck ho gya!'),
+        ));
+        print(response.body);
       }
     } catch (e) {
       Scaffold.of(context).showSnackBar(new SnackBar(
