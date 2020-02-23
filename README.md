@@ -1,4 +1,4 @@
-## 90 Days Flutter ![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fthefallenmerc) [![GitHub stars](https://img.shields.io/github/stars/thefallenmerc/90days-flutter?style=social)](https://github.com/login?return_to=%2Fthefallenmerc%90days-flutter) ![GitHub forks](https://img.shields.io/github/forks/thefallenmerc/90days-flutter?style=social) ![GitHub last commit](https://img.shields.io/github/last-commit/thefallenmerc/90days-flutter) ![Dart CI](https://github.com/thefallenmerc/90days-flutterp/workflows/Dart%20CI/badge.svg) [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/thefallenmerc/90days-flutter) 
+## 90 Days Flutter ![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fthefallenmerc) [![GitHub stars](https://img.shields.io/github/stars/thefallenmerc/90days-flutter?style=social)](https://github.com/login?return_to=%2Fthefallenmerc%90days-flutter) ![GitHub forks](https://img.shields.io/github/forks/thefallenmerc/90days-flutter?style=social) ![GitHub last commit](https://img.shields.io/github/last-commit/thefallenmerc/90days-flutter) [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/thefallenmerc/90days-flutter) 
 
 90 Days Flutter is an app designed create quick goals that user wants to fulfil.
 
@@ -9,11 +9,11 @@
 
   New Resolution              |   Dashboard 
 :-------------------------:|:-------------------------:
-![](https://github.com/thefallenmerc/90days-flutter/blob/master/screenshots/screenshot_4.jpeg?raw=true)|![](https://github.com/TheAlphamerc/flutter_wallet_app/blob/master/screenshots/screenshot_3.jpeg?raw=true)
+![](https://github.com/thefallenmerc/90days-flutter/blob/master/screenshots/screenshot_4.jpeg?raw=true)|![](https://github.com/thefallenmerc/90days-flutter/blob/master/screenshots/screenshot_3.jpeg?raw=true)
 
  Resolution Detail              |  Edit Resolution 
 :-------------------------:|:-------------------------:
-![](https://github.com/thefallenmerc/90days-flutter/blob/master/screenshots/screenshot_2.jpeg?raw=true)|![](https://github.com/TheAlphamerc/flutter_wallet_app/blob/master/screenshots/screenshot_1.jpeg?raw=true)
+![](https://github.com/thefallenmerc/90days-flutter/blob/master/screenshots/screenshot_2.jpeg?raw=true)|![](https://github.com/thefallenmerc/90days-flutter/blob/master/screenshots/screenshot_1.jpeg?raw=true)
 
 ## Pull Requests
 
