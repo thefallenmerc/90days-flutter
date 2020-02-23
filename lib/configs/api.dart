@@ -1,7 +1,6 @@
 class ApiConfig {
-  // static String base_url =
-  //     'http://192.168.43.237/90days/public/index.php/api/'; //my wifi
-  static String base_url = 'https://shubhamschahar.com/90days/api/'; //my wifi
+  // static String base_url = 'http://localhost:8000/api/'; //my wifi
+  static String base_url = 'http://90days.shubhamschahar.com/api/'; //server
   // static String base_url =
   //     'http://192.168.1.2/90days/public/index.php/api/'; //office wifi
   // static String base_url =
